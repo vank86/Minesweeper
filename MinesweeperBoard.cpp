@@ -5,18 +5,27 @@
 #include "MinesweeperBoard.h"
 #include <iostream>
 
-MinesweeperBoard::MinesweeperBoard(int widthInput, int heightInput) : width(widthInput), height(heightInput)
+MinesweeperBoard::MinesweeperBoard()
 {
-    board.resize(width);
-    for (int i = 0; i < width; i++)
-        board[i].resize(height);
-    for (int i = 0; i < width; i++)
-    {
-        for(int j = 0; j < height; j++) {
-            board[i][j].hasMine = true;
-            board[i][j].hasFlag = true;
-            board[i][j].isRevealed = true;
 
+}
+
+
+MinesweeperBoard::MinesweeperBoard(int heightInput1, int widthInput, GameMode mode)
+        : height(heightInput1), width(widthInput)
+{
+    if (mode == DEBUG){
+        board.resize(height);
+        for (int i = 0; i < height; i++)
+            board[i].resize(width);
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (i == j || i == 1 || j % 2 == 0)
+                    board[i][j].hasMine = true;
+                board[i][j].hasFlag = false;
+                board[i][j].isRevealed = false;
+
+            }
         }
     }
 }

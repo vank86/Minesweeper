@@ -8,6 +8,15 @@
 #include <iostream>
 
 using std::cout;
+
+enum GameMode
+{
+    DEBUG,
+    EASY,
+    NORMAL,
+    HARD
+};
+
 struct Field{
     bool hasMine;
     bool isRevealed;
@@ -17,12 +26,13 @@ struct Field{
 class MinesweeperBoard
 {
 private:
-    int width;
     int height;
+    int width;
     std::vector<std::vector<Field>> board;
 
 public:
-    MinesweeperBoard(int widthInput, int heightInput);
+    MinesweeperBoard();
+    MinesweeperBoard(int heightInput1, int widthInput, GameMode  mode);
     void debug_display() const;
 };
 
