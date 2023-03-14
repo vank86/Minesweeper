@@ -3,8 +3,7 @@
 //
 
 #include "MinesweeperBoard.h"
-#include <iostream>
-#include <algorithm>
+
 
 MinesweeperBoard::MinesweeperBoard()
 {
@@ -59,10 +58,10 @@ MinesweeperBoard::MinesweeperBoard(int heightInput1, int widthInput, GameMode mo
 
     if (mode == HARD) {
         int easyAmountOfMines;
-        if ((height * width) % 5 == 0){
-            easyAmountOfMines = height * width * 0.2;
+        if ((height * width) % 3 == 0){
+            easyAmountOfMines = static_cast<int>(height * width * 0.33);
         } else {
-            easyAmountOfMines = height * width * 0.2 + 1;
+            easyAmountOfMines = static_cast<int>(height * width * 0.33) + 1;
         }
         srand(time(nullptr));
         for (int mines = 0; mines < easyAmountOfMines; mines++)
