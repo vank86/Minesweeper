@@ -38,8 +38,11 @@ MinesweeperBoard::MinesweeperBoard(int heightInput1, int widthInput, GameMode mo
             easyAmountOfMines = static_cast<int>(height * width * 0.1) + 1;
         }
         srand(time(nullptr));
-        for (int mines = 0; mines < easyAmountOfMines; mines++)
-            board[rand()%height][rand()%width].hasMine = true;
+        for (int mines = 0; mines < easyAmountOfMines; mines++) {
+            int randomHeigh = rand() % height;
+            int randomWidth = rand() % width;
+            board[randomHeigh][randomWidth].hasMine = true;
+        }
     }
     if (mode == NORMAL) {
         int easyAmountOfMines = 0;
