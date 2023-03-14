@@ -6,6 +6,8 @@
 #define MINESWEEPER_1_MINESWEEPERBOARD_H
 #include <vector>
 #include <iostream>
+#include <iostream>
+#include <algorithm>
 
 using std::cout;
 

@@ -3,8 +3,7 @@
 //
 
 #include "MinesweeperBoard.h"
-#include <iostream>
-#include <algorithm>
+
 
 MinesweeperBoard::MinesweeperBoard()
 {
