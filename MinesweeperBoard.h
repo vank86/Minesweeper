@@ -33,13 +33,18 @@ public:
     MinesweeperBoard();
     MinesweeperBoard(int heightInput, int widthInput, GameMode  mode);
     void debug_display() const;
-    int getBoardWidth() const;
-    int getBoardHeight() const;
-    int getMineCount() const;
-    int countMines(int row, int col) const;
-    bool hasFlag(int row, int col) const;
-    void toggleFlag(int row, int col);
+    /*      PART 4        */
+    int getBoardWidth() const;  // OK
+    int getBoardHeight() const; // OK
+    int getMineCount() const;   // OK
+    int countMines(int row, int col) const; // OK
+    bool hasFlag(int row, int col) const;   // OK, MAY BE REBUILT
+    void toggleFlag(int row, int col);      // OK
+    void revealField(int row, int col);     // NOT OK
+    bool isRevealed(int row, int col) const;// OK
 
+    GameState getGameState() const;         // NOT OK
+//    char getFieldInfo(int row, int col) const;
 
 };
 

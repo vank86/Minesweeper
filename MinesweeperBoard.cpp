@@ -129,7 +129,36 @@ int MinesweeperBoard::countMines(int row, int col) const
         return -1;
     if (row > height || col > width || row < 0 || col < 0)
         return -1;
-// ??????????????
+    /*
+             Idea was taken from https://www.geeksforgeeks.org/cpp-implementation-minesweeper-game/
+
+                -------------------------------------------------------------------
+                |1.     row-1;col-1     |2.   row-1;col+0     |3.   row-1;col+1    |
+                -------------------------------------------------------------------
+                |4.     row+0;col-1     |     row  ;  col     |5.   row+0;col+1    |
+                -------------------------------------------------------------------
+                |6.     row+1;col-1     |7.   row+1;col+0     |8.   row+1;col+1    |
+                -------------------------------------------------------------------
+     */
+    int countOfMines = 0;
+    if (board[row-1][col-1].hasMine)     // 1.
+        countOfMines++;
+    if (board[row-1][col].hasMine)       // 2.
+        countOfMines++;
+    if (board[row-1][col+1].hasMine)     // 3.
+        countOfMines++;
+    if (board[row][col-1].hasMine)       // 4.
+        countOfMines++;
+    if (board[row][col+1].hasMine)       // 5.
+        countOfMines++;
+    if (board[row+1][col-1].hasMine)     // 6.
+        countOfMines++;
+    if (board[row+1][col].hasMine)       // 7.
+        countOfMines++;
+    if (board[row+1][col+1].hasMine)     // 8.
+        countOfMines++;
+    return countOfMines;
+
 }
 
 bool MinesweeperBoard::hasFlag(int row, int col) const
@@ -146,4 +175,23 @@ void MinesweeperBoard::toggleFlag(int row, int col)
         board[row][col].hasFlag = true;
 }
 
+void MinesweeperBoard::revealField(int row, int col)
+{
+    if (!board[row][col].hasMine)
+        board[row][col].isRevealed = true;
+//    firs action ???????
+    if (board[row][col].hasMine)
+        ;
 
+}
+
+bool MinesweeperBoard::isRevealed(int row, int col) const
+{
+    if (board[row][col].isRevealed)
+        return true;
+}
+
+GameState MinesweeperBoard::getGameState() const
+{
+
+}
