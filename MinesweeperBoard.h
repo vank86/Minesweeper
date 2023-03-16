@@ -11,13 +11,9 @@
 
 using std::cout;
 
-enum GameMode
-{
-    DEBUG,
-    EASY,
-    NORMAL,
-    HARD
-};
+enum GameMode   {DEBUG, EASY, NORMAL, HARD};
+enum GameState  { RUNNING, FINISHED_WIN, FINISHED_LOSS };
+
 
 struct Field{
     bool hasMine;
@@ -30,12 +26,21 @@ class MinesweeperBoard
 private:
     int height;
     int width;
+    int amountOfMines;
     std::vector<std::vector<Field>> board;
 
 public:
     MinesweeperBoard();
-    MinesweeperBoard(int heightInput1, int widthInput, GameMode  mode);
+    MinesweeperBoard(int heightInput, int widthInput, GameMode  mode);
     void debug_display() const;
+    int getBoardWidth() const;
+    int getBoardHeight() const;
+    int getMineCount() const;
+    int countMines(int row, int col) const;
+    bool hasFlag(int row, int col) const;
+    void toggleFlag(int row, int col);
+
+
 };
 
 
