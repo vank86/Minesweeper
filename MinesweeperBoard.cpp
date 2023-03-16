@@ -177,12 +177,13 @@ void MinesweeperBoard::toggleFlag(int row, int col)
 
 void MinesweeperBoard::revealField(int row, int col)
 {
-    if (!board[row][col].hasMine)
+    if (!board[row][col].hasMine && !board[row][col].isRevealed)
         board[row][col].isRevealed = true;
 //    firs action ???????
-    if (board[row][col].hasMine)
-        ;
 
+
+    if (board[row][col].hasMine && !board[row][col].isRevealed) {
+    }
 }
 
 bool MinesweeperBoard::isRevealed(int row, int col) const
@@ -194,4 +195,41 @@ bool MinesweeperBoard::isRevealed(int row, int col) const
 GameState MinesweeperBoard::getGameState() const
 {
 
+}
+
+
+
+
+// if row or col is outside board                         - return '#' character                +++++
+// if the field is not revealed and has a flag            - return 'F' character                +++++
+// if the field is not revealed and does not have a flag  - return '_' (underscore) character   +++++
+// if the field is revealed and has mine                  - return 'x' character                +++++
+// if the field is revealed and has 0 mines around        - return ' ' (space) character        +++++
+// if the field is revealed and has some mines around     - return '1' ... '8' (number of mines as a digit)
+
+char MinesweeperBoard::getFieldInfo(int row, int col) const
+{
+    if(row > height || col > width || row < 0 || col < 0)
+        return '#';
+    if(!board[row][col].isRevealed && board[row][col].hasFlag)
+        return 'F';
+    if(!board[row][col].isRevealed && !board[row][col].hasFlag)
+        return '_';
+    if(board[row][col].isRevealed && board[row][col].hasMine)
+        return 'x';
+    //  == 0 and > 0 cases are combined into 1 function instead of 2 separated ones
+    if(board[row][col].isRevealed && MinesweeperBoard::countMines(row, col) >= 0) {
+        switch (MinesweeperBoard::countMines(row, col)) {
+            case 0: return ' ';
+            case 1: return '1';
+            case 2: return '2';
+            case 3: return '3';
+            case 4: return '4';
+            case 5: return '5';
+            case 6: return '6';
+            case 7: return '7';
+            case 8: return '8';
+            default: return '?';
+        }
+    }
 }
