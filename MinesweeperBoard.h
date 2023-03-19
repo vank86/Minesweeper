@@ -30,9 +30,10 @@ private:
     std::vector<std::vector<Field>> board;
 
 public:
-    MinesweeperBoard();
+//    MinesweeperBoard();
     MinesweeperBoard(int heightInput, int widthInput, GameMode  mode);
     void debug_display() const;
+    void minesRandomiser(GameMode &mode);
     /*      PART 4        */
     // to think about DO NOTHING IF(*):
     int getBoardWidth() const;                  // OK

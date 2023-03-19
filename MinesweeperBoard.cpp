@@ -5,11 +5,11 @@
 #include "MinesweeperBoard.h"
 
 
-MinesweeperBoard::MinesweeperBoard()
-{
-
-
-}
+//MinesweeperBoard::MinesweeperBoard()
+//{
+//
+//
+//}
 
 
 MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mode)
@@ -17,7 +17,10 @@ MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mod
     board.resize(height);
     for (int i = 0; i < height; i++)
         board[i].resize(width);
-
+    minesRandomiser(mode);
+}
+void MinesweeperBoard::minesRandomiser(GameMode &mode)
+{
     if (mode == DEBUG) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -29,6 +32,7 @@ MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mod
             }
         }
     }
+
     if (mode == EASY) {
         if ((height * width) % 10 == 0) {
             amountOfMines = static_cast<int>(height * width * 0.1);
@@ -45,7 +49,6 @@ MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mod
                 continue;
         }
     }
-    //            при помощи if else елс и мина уже есть не уменьшаем amountOfmines;
 
     if (mode == NORMAL) {
         if ((height * width) % 5 == 0) {
@@ -175,6 +178,18 @@ void MinesweeperBoard::toggleFlag(int row, int col)
         board[row][col].hasFlag = true;
 }
 
+// try to reveal the field at (row,col)
+// Do nothing if any of the following is true
+// - field was already revealed
+// - either row or col is outside board
+// - game is already finished
+// - there is a flag on the field
+//
+// If the field was not revealed and there is no mine on it - reveal it
+// If the field was not revealed and there is a mine on it:
+// - if its the first player action - move mine to another location, reveal field (not in DEBUG mode!)
+// - reveal it and finish game
+
 void MinesweeperBoard::revealField(int row, int col)
 {
     if (!board[row][col].hasMine && !board[row][col].isRevealed)
@@ -190,11 +205,11 @@ bool MinesweeperBoard::isRevealed(int row, int col) const
 {
     if (board[row][col].isRevealed)
         return true;
+    return !board[row][col].isRevealed;
 }
 
 GameState MinesweeperBoard::getGameState() const
 {
-
 }
 
 
