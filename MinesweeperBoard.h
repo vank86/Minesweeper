@@ -27,13 +27,15 @@ private:
     int height;
     int width;
     int amountOfMines;
+    GameState State;
     std::vector<std::vector<Field>> board;
 
 public:
 //    MinesweeperBoard();
-    MinesweeperBoard(int heightInput, int widthInput, GameMode  mode);
+    MinesweeperBoard(int heightInput, int widthInput, GameMode mode);
     void debug_display() const;
-    void minesRandomiser(GameMode &mode);
+    int createMines(const GameMode& mode);
+    void minesRandomiser();
     /*      PART 4        */
     // to think about DO NOTHING IF(*):
     int getBoardWidth() const;                  // OK
