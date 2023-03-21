@@ -23,6 +23,7 @@ MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mod
 }
 
 int MinesweeperBoard::createMines(const GameMode& mode) {
+    amountOfMines = 0;
     switch (mode) {
         case EASY: {
             if ((height * width) % 10 == 0) {
