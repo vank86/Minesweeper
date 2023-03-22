@@ -14,12 +14,12 @@
 
 MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mode)
         : height(heightInput), width(widthInput) {
-    board.resize(height);
+    this->board.resize(height);
     for (int i = 0; i < height; i++)
-        board[i].resize(width);
-    State = RUNNING;
-    createMines(mode);
-    minesRandomiser();
+        this->board[i].resize(width);
+    this->State = RUNNING;
+    this->createMines(mode);
+    this->minesRandomiser();
 }
 
 int MinesweeperBoard::createMines(const GameMode& mode) {
@@ -185,11 +185,17 @@ void MinesweeperBoard::revealField(int row, int col)
                 State == RUNNING)
         board[row][col].isRevealed = true;
 
-//    first action ???????
-
+//    first action: сделать проверку на открытые поля, если не было до этого -
+//                  перемещаем мину;
+    if (board[row][col].hasMine && !board[row][col].isRevealed)
+    {
+        for (auto &i : board)
+            for (auto &j : i)
+                if(j.isRevealed)
+                    ;
+    }
     if (board[row][col].hasMine && !board[row][col].isRevealed) {
         board[row][col].isRevealed = true;
-        State = FINISHED_LOSS;
     }
 }
 
@@ -200,9 +206,26 @@ bool MinesweeperBoard::isRevealed(int row, int col) const
     return !board[row][col].isRevealed;
 }
 
+// return current game state:
+// - FINISHED_LOSS - if the player revealed field with mine
+// - FINISHED_WIN  - if the player won the game (all unrevealed fields have mines)
+// - RUNNING       - if the game is not yet finished
+//              ???
+
 GameState MinesweeperBoard::getGameState() const
 {
-    return State;
+    for (auto &i : board)
+        for (auto &j : i)
+            if (j.hasMine && j.isRevealed)
+                return FINISHED_LOSS;
+//      ?????
+
+
+    for (auto &i : board)
+        for (auto &j : i)
+            if (j.hasMine && j.isRevealed)
+                return FINISHED_LOSS;
+    return RUNNING;
 }
 
 
