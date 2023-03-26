@@ -18,7 +18,7 @@ MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mod
     for (int i = 0; i < height; i++)
         this->board[i].resize(width);
     this->State = RUNNING;
-    this->createMines(mode);
+    amountOfMines = createMines(mode);
     this->minesRandomiser();
 }
 
@@ -191,8 +191,10 @@ void MinesweeperBoard::revealField(int row, int col)
     {
         for (auto &i : board)
             for (auto &j : i)
-                if(j.isRevealed)
-                    ;
+                if(!j.isRevealed) {
+                    board[row][col].hasMine = false;
+
+                }
     }
     if (board[row][col].hasMine && !board[row][col].isRevealed) {
         board[row][col].isRevealed = true;
@@ -218,13 +220,14 @@ GameState MinesweeperBoard::getGameState() const
         for (auto &j : i)
             if (j.hasMine && j.isRevealed)
                 return FINISHED_LOSS;
-//      ?????
-
-
+    int unrevealedCount = height * width;
     for (auto &i : board)
-        for (auto &j : i)
-            if (j.hasMine && j.isRevealed)
-                return FINISHED_LOSS;
+        for (auto &j : i) {
+            if (j.isRevealed)
+                unrevealedCount--;
+            if (unrevealedCount == amountOfMines)
+                return FINISHED_WIN;
+        }
     return RUNNING;
 }
 

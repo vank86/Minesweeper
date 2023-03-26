@@ -1,9 +1,15 @@
 # ninja log v5
-586	646	1679425637536731193	Minesweeper_1	d9d4e7e852e3c50c
-4	586	1679425637474670416	CMakeFiles/Minesweeper_1.dir/main.cpp.o	58c026c1a507163b
-3	635	1679425483576001182	CMakeFiles/Minesweeper_1.dir/MinesweeperBoard.cpp.o	6865069da9f5b7c6
-0	203	1678813496215241949	build.ninja	18ae99e1b87d22f5
-3	691	1679425697870425020	CMakeFiles/Minesweeper_1.dir/MinesweeperBoard.cpp.o	6865069da9f5b7c6
-691	751	1679425697933214629	Minesweeper_1	d9d4e7e852e3c50c
-3	747	1679425712381679812	CMakeFiles/Minesweeper_1.dir/MinesweeperBoard.cpp.o	6865069da9f5b7c6
-748	862	1679425712500761671	Minesweeper_1	d9d4e7e852e3c50c
+1220	1337	1679861806188778071	Minesweeper_1	92046a7af06a2973
+6	1027	1679861805871769288	CMakeFiles/Minesweeper_1.dir/MSBoardTextView.cpp.o	c01c0a195c88220
+5	1078	1679861805924721062	CMakeFiles/Minesweeper_1.dir/main.cpp.o	58c026c1a507163b
+6	1220	1679861806068385848	CMakeFiles/Minesweeper_1.dir/MinesweeperBoard.cpp.o	6865069da9f5b7c6
+0	203	1679861885612608153	build.ninja	18ae99e1b87d22f5
+7	85	1679862927023364780	CMakeFiles/Minesweeper_1.dir/MSTextController.cpp.o	e1a9d92b84b8f90
+7	938	1679862927872551517	CMakeFiles/Minesweeper_1.dir/MSBoardTextView.cpp.o	c01c0a195c88220
+6	963	1679862927898883364	CMakeFiles/Minesweeper_1.dir/main.cpp.o	58c026c1a507163b
+6	1083	1679862928019699806	CMakeFiles/Minesweeper_1.dir/MinesweeperBoard.cpp.o	6865069da9f5b7c6
+1083	1185	1679862928124486100	Minesweeper_1	3be5157ac31070e2
+5	1045	1679863106133505099	CMakeFiles/Minesweeper_1.dir/MSBoardTextView.cpp.o	c01c0a195c88220
+5	1094	1679863106185014528	CMakeFiles/Minesweeper_1.dir/main.cpp.o	58c026c1a507163b
+5	1212	1679863106303128434	CMakeFiles/Minesweeper_1.dir/MinesweeperBoard.cpp.o	6865069da9f5b7c6
+1212	1301	1679863106396296192	Minesweeper_1	3be5157ac31070e2

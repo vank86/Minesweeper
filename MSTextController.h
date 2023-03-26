@@ -1,0 +1,14 @@
+//
+// Created by Ivan on 26/03/2023.
+//
+
+#ifndef MINESWEEPER_1_MSTEXTCONTROLLER_H
+#define MINESWEEPER_1_MSTEXTCONTROLLER_H
+
+
+class MSTextController {
+
+};
+
+
+#endif //MINESWEEPER_1_MSTEXTCONTROLLER_H
