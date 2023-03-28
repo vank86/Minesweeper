@@ -8,11 +8,14 @@ int main() {
     MinesweeperBoard board(6,7, EASY);
     board.debug_display();
     MSBoardTextView view (board);
-    view.display();
+//    view.display();
     board.revealField(1,3);
     cout << '\n';
     board.toggleFlag(2,2);
     view.display();
+    MSTextController ctrl ( board, view );
+
+    ctrl.play();
 
 
 //    std::cout << "\n\n\n";

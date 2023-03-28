@@ -1,9 +1,5 @@
-//
-// Created by Ivan on 26/03/2023.
-//
 
 #include "MSBoardTextView.h"
-#include <vector>
 
 MSBoardTextView::MSBoardTextView(MinesweeperBoard &b) : board(b)
 {

@@ -180,22 +180,20 @@ void MinesweeperBoard::toggleFlag(int row, int col)
 
 void MinesweeperBoard::revealField(int row, int col)
 {
-    if (!board[row][col].hasMine && !board[row][col].isRevealed &&
-            row < height && col < width && !board[row][col].hasFlag &&
-                State == RUNNING)
+    if (!board[row][col].hasMine && !board[row][col].isRevealed)
         board[row][col].isRevealed = true;
 
 //    first action: сделать проверку на открытые поля, если не было до этого -
 //                  перемещаем мину;
-    if (board[row][col].hasMine && !board[row][col].isRevealed)
-    {
-        for (auto &i : board)
-            for (auto &j : i)
-                if(!j.isRevealed) {
-                    board[row][col].hasMine = false;
-
-                }
-    }
+//    if (board[row][col].hasMine && !board[row][col].isRevealed)
+//    {
+//        for (auto &i : board)
+//            for (auto &j : i)
+//                if(!j.isRevealed) {
+//                    board[row][col].hasMine = false;
+//
+//                }
+//    }
     if (board[row][col].hasMine && !board[row][col].isRevealed) {
         board[row][col].isRevealed = true;
     }
