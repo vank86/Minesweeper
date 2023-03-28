@@ -205,7 +205,6 @@ bool MinesweeperBoard::isRevealed(int row, int col) const
 {
     if (board[row][col].isRevealed)
         return true;
-    return !board[row][col].isRevealed;
 }
 
 // return current game state:
