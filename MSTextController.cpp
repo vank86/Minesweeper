@@ -12,7 +12,7 @@ void MSTextController::play()
     while (board.getGameState() == RUNNING){
         int x, y;
         char move;
-        cout << "Do you wanna toggle flag or reveal field? F/R" << endl;
+        cout << "Do you wanna toggle a flag or reveal a field? F/R" << endl;
         cin >> move;
         switch (move) {
             default: cout << "You entered a wrong answer!" << endl; break;

@@ -116,8 +116,8 @@ int MinesweeperBoard::getMineCount() const
 
 int MinesweeperBoard::countMines(int row, int col) const
 {
-    if (!board[row][col].isRevealed)
-        return -1;
+//    if (!board[row][col].isRevealed)
+//        return -1;
     if (row > height || col > width || row < 0 || col < 0)
         return -1;
     /*
@@ -131,23 +131,62 @@ int MinesweeperBoard::countMines(int row, int col) const
                 |6.     row+1;col-1     |7.   row+1;col+0     |8.   row+1;col+1    |
                 -------------------------------------------------------------------
      */
+//   ПРОБЛЕМА С ВЫХОДОМ ЗА ГРАНИЦУ ВЕКТОРА ПРИ ПРОВЕРКЕ МИН ВОКРУГ !!!!!
+
     int countOfMines = 0;
-    if (board[row-1][col-1].hasMine)     // 1.
-        countOfMines++;
-    if (board[row-1][col].hasMine)       // 2.
-        countOfMines++;
-    if (board[row-1][col+1].hasMine)     // 3.
-        countOfMines++;
-    if (board[row][col-1].hasMine)       // 4.
-        countOfMines++;
-    if (board[row][col+1].hasMine)       // 5.
-        countOfMines++;
-    if (board[row+1][col-1].hasMine)     // 6.
-        countOfMines++;
-    if (board[row+1][col].hasMine)       // 7.
-        countOfMines++;
-    if (board[row+1][col+1].hasMine)     // 8.
-        countOfMines++;
+    if (row != 0 && col != 0) {
+        if (board[row - 1][col - 1].hasMine)     // 1.
+            countOfMines++;
+        if (board[row - 1][col].hasMine)       // 2.
+            countOfMines++;
+        if (board[row - 1][col + 1].hasMine)     // 3.
+            countOfMines++;
+        if (board[row][col - 1].hasMine)       // 4.
+            countOfMines++;
+        if (board[row][col + 1].hasMine)       // 5.
+            countOfMines++;
+        if (board[row + 1][col - 1].hasMine)     // 6.
+            countOfMines++;
+        if (board[row + 1][col].hasMine)       // 7.
+            countOfMines++;
+        if (board[row + 1][col + 1].hasMine)     // 8.
+            countOfMines++;
+    }
+    if (row == 0 && col == 0)
+    {
+        if (board[row][col + 1].hasMine)       // 5.
+            countOfMines++;
+        if (board[row + 1][col].hasMine)       // 7.
+            countOfMines++;
+        if (board[row + 1][col + 1].hasMine)     // 8.
+            countOfMines++;
+    }
+    if (row == 0)
+    {
+        if (board[row][col - 1].hasMine)       // 4.
+            countOfMines++;
+        if (board[row][col + 1].hasMine)       // 5.
+            countOfMines++;
+        if (board[row + 1][col - 1].hasMine)     // 6.
+            countOfMines++;
+        if (board[row + 1][col].hasMine)       // 7.
+            countOfMines++;
+        if (board[row + 1][col + 1].hasMine)     // 8.
+            countOfMines++;
+    }
+    if (col == 0)
+    {
+        if (board[row - 1][col].hasMine)       // 2.
+            countOfMines++;
+        if (board[row - 1][col + 1].hasMine)     // 3.
+            countOfMines++;
+        if (board[row][col + 1].hasMine)       // 5.
+            countOfMines++;
+        if (board[row + 1][col].hasMine)       // 7.
+            countOfMines++;
+        if (board[row + 1][col + 1].hasMine)     // 8.
+            countOfMines++;
+    }
     return countOfMines;
 
 }
@@ -162,7 +201,7 @@ bool MinesweeperBoard::hasFlag(int row, int col) const
 
 void MinesweeperBoard::toggleFlag(int row, int col)
 {
-    if (!board[row][col].isRevealed)
+    if (!board[row][col].isRevealed && !board[row][col].hasFlag)
         board[row][col].hasFlag = true;
 }
 
