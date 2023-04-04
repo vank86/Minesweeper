@@ -134,7 +134,8 @@ int MinesweeperBoard::countMines(int row, int col) const
 //   ПРОБЛЕМА С ВЫХОДОМ ЗА ГРАНИЦУ ВЕКТОРА ПРИ ПРОВЕРКЕ МИН ВОКРУГ !!!!!
 
     int countOfMines = 0;
-    if (row != 0 && col != 0) {
+//    Free pos except corners and edges
+    if (row != 0 && col != 0 && row != height - 1 && col != width - 1) {
         if (board[row - 1][col - 1].hasMine)     // 1.
             countOfMines++;
         if (board[row - 1][col].hasMine)       // 2.
@@ -152,6 +153,7 @@ int MinesweeperBoard::countMines(int row, int col) const
         if (board[row + 1][col + 1].hasMine)     // 8.
             countOfMines++;
     }
+//    Top-Left corner
     if (row == 0 && col == 0)
     {
         if (board[row][col + 1].hasMine)       // 5.
@@ -161,7 +163,39 @@ int MinesweeperBoard::countMines(int row, int col) const
         if (board[row + 1][col + 1].hasMine)     // 8.
             countOfMines++;
     }
-    if (row == 0)
+//    Top-Right corner
+    if (row == 0 && col == width - 1)
+    {
+        if (board[row][col - 1].hasMine)       // 4.
+            countOfMines++;
+        if (board[row + 1][col - 1].hasMine)     // 6.
+            countOfMines++;
+        if (board[row + 1][col].hasMine)       // 7.
+            countOfMines++;
+    }
+//    Bottom-Right corner
+    if (row == height - 1 && col == width - 1)
+    {
+        if (board[row - 1][col - 1].hasMine)     // 1.
+            countOfMines++;
+        if (board[row - 1][col].hasMine)       // 2.
+            countOfMines++;
+        if (board[row][col - 1].hasMine)       // 4.
+            countOfMines++;
+    }
+//    Bottom-Left corner
+    if (row == height - 1 && col == 0)
+    {
+        if (board[row - 1][col].hasMine)       // 2.
+            countOfMines++;
+        if (board[row - 1][col + 1].hasMine)     // 3.
+            countOfMines++;
+        if (board[row][col + 1].hasMine)       // 5.
+            countOfMines++;
+    }
+
+    //    Top edge
+    if (row == 0 && col > 0 && col < width - 1)
     {
         if (board[row][col - 1].hasMine)       // 4.
             countOfMines++;
@@ -174,7 +208,38 @@ int MinesweeperBoard::countMines(int row, int col) const
         if (board[row + 1][col + 1].hasMine)     // 8.
             countOfMines++;
     }
-    if (col == 0)
+
+    //    Bottom edge
+    if (row == height - 1 && col > 0 && col < width - 1)
+    {
+        if (board[row - 1][col - 1].hasMine)     // 1.
+            countOfMines++;
+        if (board[row - 1][col].hasMine)       // 2.
+            countOfMines++;
+        if (board[row - 1][col + 1].hasMine)     // 3.
+            countOfMines++;
+        if (board[row][col - 1].hasMine)       // 4.
+            countOfMines++;
+        if (board[row][col + 1].hasMine)       // 5.
+            countOfMines++;
+    }
+
+    //    Right edge
+    if (col == width - 1 && row > 0 && row < height - 1)
+    {
+        if (board[row - 1][col - 1].hasMine)     // 1.
+            countOfMines++;
+        if (board[row - 1][col].hasMine)       // 2.
+            countOfMines++;
+        if (board[row][col - 1].hasMine)       // 4.
+            countOfMines++;
+        if (board[row + 1][col - 1].hasMine)     // 6.
+            countOfMines++;
+        if (board[row + 1][col].hasMine)       // 7.
+            countOfMines++;
+    }
+    //    Left edge
+    if (col == 0 && row > 0 && row < height - 1)
     {
         if (board[row - 1][col].hasMine)       // 2.
             countOfMines++;
