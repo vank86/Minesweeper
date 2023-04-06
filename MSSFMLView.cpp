@@ -25,7 +25,7 @@ void MSSFMLView::draw(sf::RenderWindow &window)
             if(board.isRevealed(i,j) && board.countMines(i,j))
             {
 // Create a text which uses our font
-                font.loadFromFile(arial.ttf);
+//                font.loadFromFile(arial.ttf);
                 sf::Text text;
                 text.setFont(font);
                 text.setCharacterSize(30);

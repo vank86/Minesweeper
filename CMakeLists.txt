@@ -30,7 +30,7 @@ if (WIN32)
 endif(WIN32)
 
 set(SOURCE_FILES main.cpp)
-add_executable(Minesweeper_1 main.cpp MinesweeperBoard.cpp MinesweeperBoard.h MSBoardTextView.cpp MSBoardTextView.h MSTextController.cpp MSTextController.h)
+add_executable(Minesweeper_1 main.cpp MinesweeperBoard.cpp MinesweeperBoard.h MSBoardTextView.cpp MSBoardTextView.h MSTextController.cpp MSTextController.h MSSFMLView.h MSSFMLView.cpp)
 include_directories(/usr/local/include)
 
 
