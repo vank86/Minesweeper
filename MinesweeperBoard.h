@@ -41,13 +41,13 @@ public:
     int getBoardWidth() const;                  // OK
     int getBoardHeight() const;                 // OK
     int getMineCount() const;                   // OK
-    int countMines(int row, int col) const;     // OK
-    bool hasFlag(int row, int col) const;       // OK, MAY BE REBUILT
-    void toggleFlag(int row, int col);          // OK       *
-    void revealField(int row, int col);         // NOT OK   *
-    bool isRevealed(int row, int col) const;    // OK
+    int countMines(int col, int row) const;     // OK
+    bool hasFlag(int col, int row) const;       // OK, MAY BE REBUILT
+    void toggleFlag(int col, int row);          // OK       *
+    void revealField(int col, int row);         // NOT OK   *
+    bool isRevealed(int col, int row) const;    // OK
     GameState getGameState() const;             // OK
-    char getFieldInfo(int row, int col) const;  // OK
+    char getFieldInfo(int col, int row) const;  // OK
 
 };
 

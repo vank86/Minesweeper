@@ -114,160 +114,160 @@ int MinesweeperBoard::getMineCount() const
     return amountOfMines;
 }
 
-int MinesweeperBoard::countMines(int row, int col) const
+int MinesweeperBoard::countMines(int col, int row) const
 {
-//    if (!board[row][col].isRevealed)
+//    if (!board[col][row].isRevealed)
 //        return -1;
-    if (row > height || col > width || row < 0 || col < 0)
+    if (col > height || row > width || col < 0 || row < 0)
         return -1;
     /*
              Idea was taken from https://www.geeksforgeeks.org/cpp-implementation-minesweeper-game/
 
                 -------------------------------------------------------------------
-                |1.     row-1;col-1     |2.   row-1;col+0     |3.   row-1;col+1    |
+                |1.     col-1;row-1     |2.   col-1;row+0     |3.   col-1;row+1    |
                 -------------------------------------------------------------------
-                |4.     row+0;col-1     |     row  ;  col     |5.   row+0;col+1    |
+                |4.     col+0;row-1     |     col  ;  row     |5.   col+0;row+1    |
                 -------------------------------------------------------------------
-                |6.     row+1;col-1     |7.   row+1;col+0     |8.   row+1;col+1    |
+                |6.     col+1;row-1     |7.   col+1;row+0     |8.   col+1;row+1    |
                 -------------------------------------------------------------------
      */
 //   ПРОБЛЕМА С ВЫХОДОМ ЗА ГРАНИЦУ ВЕКТОРА ПРИ ПРОВЕРКЕ МИН ВОКРУГ !!!!!
 
     int countOfMines = 0;
 //    Free pos except corners and edges
-    if (row != 0 && col != 0 && row != height - 1 && col != width - 1) {
-        if (board[row - 1][col - 1].hasMine)     // 1.
+    if (col != 0 && row != 0 && col != height - 1 && row != width - 1) {
+        if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
-        if (board[row - 1][col].hasMine)       // 2.
+        if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
-        if (board[row - 1][col + 1].hasMine)     // 3.
+        if (board[col - 1][row + 1].hasMine)     // 3.
             countOfMines++;
-        if (board[row][col - 1].hasMine)       // 4.
+        if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
-        if (board[row][col + 1].hasMine)       // 5.
+        if (board[col][row + 1].hasMine)       // 5.
             countOfMines++;
-        if (board[row + 1][col - 1].hasMine)     // 6.
+        if (board[col + 1][row - 1].hasMine)     // 6.
             countOfMines++;
-        if (board[row + 1][col].hasMine)       // 7.
+        if (board[col + 1][row].hasMine)       // 7.
             countOfMines++;
-        if (board[row + 1][col + 1].hasMine)     // 8.
+        if (board[col + 1][row + 1].hasMine)     // 8.
             countOfMines++;
     }
 //    Top-Left corner
-    if (row == 0 && col == 0)
+    if (col == 0 && row == 0)
     {
-        if (board[row][col + 1].hasMine)       // 5.
+        if (board[col][row + 1].hasMine)       // 5.
             countOfMines++;
-        if (board[row + 1][col].hasMine)       // 7.
+        if (board[col + 1][row].hasMine)       // 7.
             countOfMines++;
-        if (board[row + 1][col + 1].hasMine)     // 8.
+        if (board[col + 1][row + 1].hasMine)     // 8.
             countOfMines++;
     }
 //    Top-Right corner
-    if (row == 0 && col == width - 1)
+    if (col == 0 && row == width - 1)
     {
-        if (board[row][col - 1].hasMine)       // 4.
+        if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
-        if (board[row + 1][col - 1].hasMine)     // 6.
+        if (board[col + 1][row - 1].hasMine)     // 6.
             countOfMines++;
-        if (board[row + 1][col].hasMine)       // 7.
+        if (board[col + 1][row].hasMine)       // 7.
             countOfMines++;
     }
 //    Bottom-Right corner
-    if (row == height - 1 && col == width - 1)
+    if (col == height - 1 && row == width - 1)
     {
-        if (board[row - 1][col - 1].hasMine)     // 1.
+        if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
-        if (board[row - 1][col].hasMine)       // 2.
+        if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
-        if (board[row][col - 1].hasMine)       // 4.
+        if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
     }
 //    Bottom-Left corner
-    if (row == height - 1 && col == 0)
+    if (col == height - 1 && row == 0)
     {
-        if (board[row - 1][col].hasMine)       // 2.
+        if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
-        if (board[row - 1][col + 1].hasMine)     // 3.
+        if (board[col - 1][row + 1].hasMine)     // 3.
             countOfMines++;
-        if (board[row][col + 1].hasMine)       // 5.
+        if (board[col][row + 1].hasMine)       // 5.
             countOfMines++;
     }
 
     //    Top edge
-    if (row == 0 && col > 0 && col < width - 1)
+    if (col == 0 && row > 0 && row < width - 1)
     {
-        if (board[row][col - 1].hasMine)       // 4.
+        if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
-        if (board[row][col + 1].hasMine)       // 5.
+        if (board[col][row + 1].hasMine)       // 5.
             countOfMines++;
-        if (board[row + 1][col - 1].hasMine)     // 6.
+        if (board[col + 1][row - 1].hasMine)     // 6.
             countOfMines++;
-        if (board[row + 1][col].hasMine)       // 7.
+        if (board[col + 1][row].hasMine)       // 7.
             countOfMines++;
-        if (board[row + 1][col + 1].hasMine)     // 8.
+        if (board[col + 1][row + 1].hasMine)     // 8.
             countOfMines++;
     }
 
     //    Bottom edge
-    if (row == height - 1 && col > 0 && col < width - 1)
+    if (col == height - 1 && row > 0 && row < width - 1)
     {
-        if (board[row - 1][col - 1].hasMine)     // 1.
+        if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
-        if (board[row - 1][col].hasMine)       // 2.
+        if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
-        if (board[row - 1][col + 1].hasMine)     // 3.
+        if (board[col - 1][row + 1].hasMine)     // 3.
             countOfMines++;
-        if (board[row][col - 1].hasMine)       // 4.
+        if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
-        if (board[row][col + 1].hasMine)       // 5.
+        if (board[col][row + 1].hasMine)       // 5.
             countOfMines++;
     }
 
     //    Right edge
-    if (col == width - 1 && row > 0 && row < height - 1)
+    if (row == width - 1 && col > 0 && col < height - 1)
     {
-        if (board[row - 1][col - 1].hasMine)     // 1.
+        if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
-        if (board[row - 1][col].hasMine)       // 2.
+        if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
-        if (board[row][col - 1].hasMine)       // 4.
+        if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
-        if (board[row + 1][col - 1].hasMine)     // 6.
+        if (board[col + 1][row - 1].hasMine)     // 6.
             countOfMines++;
-        if (board[row + 1][col].hasMine)       // 7.
+        if (board[col + 1][row].hasMine)       // 7.
             countOfMines++;
     }
     //    Left edge
-    if (col == 0 && row > 0 && row < height - 1)
+    if (row == 0 && col > 0 && col < height - 1)
     {
-        if (board[row - 1][col].hasMine)       // 2.
+        if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
-        if (board[row - 1][col + 1].hasMine)     // 3.
+        if (board[col - 1][row + 1].hasMine)     // 3.
             countOfMines++;
-        if (board[row][col + 1].hasMine)       // 5.
+        if (board[col][row + 1].hasMine)       // 5.
             countOfMines++;
-        if (board[row + 1][col].hasMine)       // 7.
+        if (board[col + 1][row].hasMine)       // 7.
             countOfMines++;
-        if (board[row + 1][col + 1].hasMine)     // 8.
+        if (board[col + 1][row + 1].hasMine)     // 8.
             countOfMines++;
     }
     return countOfMines;
 
 }
 
-bool MinesweeperBoard::hasFlag(int row, int col) const
+bool MinesweeperBoard::hasFlag(int col, int row) const
 {
-    if (board[row][col].hasFlag)
+    if (board[col][row].hasFlag)
         return true;
-    if((row > height || col > width || row < 0 || col < 0) || !board[row][col].hasFlag || board[row][col].isRevealed)
+    if((col > height || row > width || col < 0 || row < 0) || !board[col][row].hasFlag || board[col][row].isRevealed)
         return false;
 }
 
-void MinesweeperBoard::toggleFlag(int row, int col)
+void MinesweeperBoard::toggleFlag(int col, int row)
 {
-    if (!board[row][col].isRevealed && !board[row][col].hasFlag)
-        board[row][col].hasFlag = true;
+    if (!board[col][row].isRevealed && !board[col][row].hasFlag)
+        board[col][row].hasFlag = true;
 }
 
 // try to reveal the field at (row,col)
@@ -282,30 +282,30 @@ void MinesweeperBoard::toggleFlag(int row, int col)
 // - if its the first player action - move mine to another location, reveal field (not in DEBUG mode!)
 // - reveal it and finish game
 
-void MinesweeperBoard::revealField(int row, int col)
+void MinesweeperBoard::revealField(int col, int row)
 {
-    if (!board[row][col].hasMine && !board[row][col].isRevealed)
-        board[row][col].isRevealed = true;
+    if (!board[col][row].hasMine && !board[col][row].isRevealed)
+        board[col][row].isRevealed = true;
 
 //    first action: сделать проверку на открытые поля, если не было до этого -
 //                  перемещаем мину;
-//    if (board[row][col].hasMine && !board[row][col].isRevealed)
+//    if (board[col][row].hasMine && !board[col][row].isRevealed)
 //    {
 //        for (auto &i : board)
 //            for (auto &j : i)
 //                if(!j.isRevealed) {
-//                    board[row][col].hasMine = false;
+//                    board[col][row].hasMine = false;
 //
 //                }
 //    }
-    if (board[row][col].hasMine && !board[row][col].isRevealed) {
-        board[row][col].isRevealed = true;
+    if (board[col][row].hasMine && !board[col][row].isRevealed) {
+        board[col][row].isRevealed = true;
     }
 }
 
-bool MinesweeperBoard::isRevealed(int row, int col) const
+bool MinesweeperBoard::isRevealed(int col, int row) const
 {
-    if (board[row][col].isRevealed)
+    if (board[col][row].isRevealed)
         return true;
 }
 
@@ -342,19 +342,19 @@ GameState MinesweeperBoard::getGameState() const
 // if the field is revealed and has 0 mines around        - return ' ' (space) character        +++++
 // if the field is revealed and has some mines around     - return '1' ... '8' (number of mines as a digit)
 
-char MinesweeperBoard::getFieldInfo(int row, int col) const
+char MinesweeperBoard::getFieldInfo(int col, int row) const
 {
-    if(row > height || col > width || row < 0 || col < 0)
+    if(col > height || row > width || col < 0 || row < 0)
         return '#';
-    if(!board[row][col].isRevealed && board[row][col].hasFlag)
+    if(!board[col][row].isRevealed && board[col][row].hasFlag)
         return 'F';
-    if(!board[row][col].isRevealed && !board[row][col].hasFlag)
+    if(!board[col][row].isRevealed && !board[col][row].hasFlag)
         return '_';
-    if(board[row][col].isRevealed && board[row][col].hasMine)
+    if(board[col][row].isRevealed && board[col][row].hasMine)
         return 'x';
     //  == 0 and > 0 cases are combined into 1 function instead of 2 separated ones
-    if(board[row][col].isRevealed && MinesweeperBoard::countMines(row, col) >= 0) {
-        switch (MinesweeperBoard::countMines(row, col)) {
+    if(board[col][row].isRevealed && MinesweeperBoard::countMines(col, row) >= 0) {
+        switch (MinesweeperBoard::countMines(col, row)) {
             case 0: return ' ';
             case 1: return '1';
             case 2: return '2';
