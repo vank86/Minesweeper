@@ -11,10 +11,10 @@
 class MSSFMLView {
 private:
     MinesweeperBoard &board;
+    sf::Font font;
 public:
     MSSFMLView(MinesweeperBoard &b);
     void draw(sf::RenderWindow &window);
-    sf::Font font;
 
 };
 
