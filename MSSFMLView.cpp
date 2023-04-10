@@ -24,61 +24,10 @@ void MSSFMLView::draw(sf::RenderWindow &window)
             }
             if(board.isRevealed(i,j) && board.countMines(i,j))
             {
-// Create a text which uses our font
                 font.loadFromFile("../arial.ttf");
-                switch (board.countMines(i,j)) {
-                    case 1:
-                    {
-                        sf::Text text("1", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-                    case 2: {
-                        sf::Text text("2", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-                    case 3: {
-                        sf::Text text("3", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-                    case 4: {
-                        sf::Text text("4", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    } ;
-                    case 5: {
-                        sf::Text text("5", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-                    case 6: {
-                        sf::Text text("6", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-                    case 7: {
-                        sf::Text text("7", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-                    case 8: {
-                        sf::Text text("8", font, 25);
-                        text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
-                        window.draw(text);
-                        break;
-                    };
-
-                }
-
+                sf::Text text(std::to_string(board.countMines(i,j)), font, 25);
+                text.setPosition(static_cast<float>(i)*50.f + 15.f, static_cast<float>(j)*50.f + 8.f);
+                window.draw(text);
             }
             if(!board.isRevealed(i,j) && !board.hasFlag(i,j))
             {
