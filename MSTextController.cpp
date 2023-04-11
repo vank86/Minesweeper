@@ -15,7 +15,7 @@ void MSTextController::play()
         cout << "Do you wanna toggle a flag or reveal a field? F/R" << endl;
         cin >> move;
         switch (move) {
-            default: cout << "You entered a wrong answer!" << endl; break;
+            default: {cout << "You entered a wrong answer!" << endl; break;}
             case 'F':
             {
                 cout << "Enter the coordinates you want to toggle(x and y)" << endl;
