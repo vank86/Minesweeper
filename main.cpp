@@ -18,7 +18,7 @@ int main() {
 //    view.display();
 //    MSTextController ctrl ( board, view );
 //
-////    ctrl.play();
+//    ctrl.play();
 
 
 /*------------SFML-----------*/
@@ -28,7 +28,7 @@ int main() {
 
     MinesweeperBoard board(10, 10, DEBUG);
     MSSFMLView view (board);  // przekazujemy przez referencję planszę jako argument konstruktora
-
+    MSTextController ctrl ( board, view );
     // symulujemy rozgrywkę
     board.toggleFlag(0,0);
     board.revealField(2,3);
@@ -36,8 +36,10 @@ int main() {
     while (window.isOpen())
     {
         sf::Event event;
+
         while (window.pollEvent(event))
         {
+
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -45,6 +47,8 @@ int main() {
         window.clear();
         view.draw(window);
         window.display();
+        ctrl.play();
+
     }
 //    std::cout << "\n\n\n";
 //    MinesweeperBoard b(5,7, HARD);

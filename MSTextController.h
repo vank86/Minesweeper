@@ -4,6 +4,7 @@
 
 #include "MinesweeperBoard.h"
 #include "MSBoardTextView.h"
+#include "MSSFMLView.h"
 #include <iostream>
 
 using std::cout;
@@ -12,10 +13,10 @@ using std::endl;
 
 class MSTextController {
 private:
-    MinesweeperBoard& board;
-    MSBoardTextView& view;
+    MinesweeperBoard &board;
+    MSSFMLView &view;
 public:
-    MSTextController(MinesweeperBoard &b, MSBoardTextView &v);
+    MSTextController(MinesweeperBoard &b, MSSFMLView &v);
     void play();
 };
 

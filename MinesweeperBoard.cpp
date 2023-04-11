@@ -268,6 +268,8 @@ void MinesweeperBoard::toggleFlag(int col, int row)
 {
     if (!board[col][row].isRevealed && !board[col][row].hasFlag)
         board[col][row].hasFlag = true;
+    else if(!board[col][row].isRevealed && board[col][row].hasFlag)
+        board[col][row].hasFlag = false;
 }
 
 // try to reveal the field at (row,col)
