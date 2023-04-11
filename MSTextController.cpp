@@ -2,14 +2,14 @@
 
 #include "MSTextController.h"
 
-MSTextController::MSTextController(MinesweeperBoard &b, MSBoardTextView &v) : board(b), view(v)
+MSTextController::MSTextController(MinesweeperBoard &b, MSSFMLView &v) : board(b), view(v)
 {
 
 }
 
 void MSTextController::play()
 {
-    while (board.getGameState() == RUNNING){
+    if (board.getGameState() == RUNNING){
         int x, y;
         char move;
         cout << "Do you wanna toggle a flag or reveal a field? F/R" << endl;
@@ -33,6 +33,5 @@ void MSTextController::play()
                 break;
             }
         }
-        view.display();
     }
 }
