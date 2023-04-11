@@ -39,7 +39,7 @@ int main() {
 
         while (window.pollEvent(event))
         {
-            ctrl.play();
+
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -47,6 +47,8 @@ int main() {
         window.clear();
         view.draw(window);
         window.display();
+        ctrl.play();
+
     }
 //    std::cout << "\n\n\n";
 //    MinesweeperBoard b(5,7, HARD);
