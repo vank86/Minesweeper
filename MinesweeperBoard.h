@@ -24,15 +24,15 @@ struct Field{
 class MinesweeperBoard
 {
 private:
-    int height;
     int width;
+    int height;
     int amountOfMines;
     GameState State;
     std::vector<std::vector<Field>> board;
 
 public:
 //    MinesweeperBoard();
-    MinesweeperBoard(int heightInput, int widthInput, GameMode mode);
+    MinesweeperBoard(int widthInput, int heightInput, GameMode mode);
     void debug_display() const;
     int createMines(const GameMode& mode);
     void minesRandomiser();

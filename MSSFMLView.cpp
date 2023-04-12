@@ -38,6 +38,14 @@ void MSSFMLView::draw(sf::RenderWindow &window)
                 emptyRectangle.setPosition(static_cast<float>(i)*50.f, static_cast<float>(j)*50.f);
                 window.draw(emptyRectangle);
             }
+            if(board.getGameState() == FINISHED_LOSS)
+            {
+                font.loadFromFile("../arial.ttf");
+                sf::Text text("GAME OVER", font, 60);
+                text.setPosition(static_cast<float>(board.getBoardWidth()) / 3 * 50.f, static_cast<float>(board.getBoardHeight()) / 3 * 50.f);
+                window.draw(text);
+
+            }
         }
     }
 }

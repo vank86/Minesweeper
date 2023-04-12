@@ -12,11 +12,11 @@
 //}
 
 
-MinesweeperBoard::MinesweeperBoard(int heightInput, int widthInput, GameMode mode)
-        : height(heightInput), width(widthInput) {
-    this->board.resize(height);
-    for (int i = 0; i < height; i++)
-        this->board[i].resize(width);
+MinesweeperBoard::MinesweeperBoard(int widthInput, int heightInput, GameMode mode)
+        : width(widthInput), height(heightInput) {
+    this->board.resize(width);
+    for (int i = 0; i < width; i++)
+        this->board[i].resize(height);
     this->State = RUNNING;
     amountOfMines = createMines(mode);
     this->minesRandomiser();
@@ -26,33 +26,33 @@ int MinesweeperBoard::createMines(const GameMode& mode) {
     amountOfMines = 0;
     switch (mode) {
         case EASY: {
-            if ((height * width) % 10 == 0) {
-                amountOfMines = static_cast<int>(height * width * 0.1);
+            if ((width * height) % 10 == 0) {
+                amountOfMines = static_cast<int>(width * height * 0.1);
             } else {
-                amountOfMines = static_cast<int>(height * width * 0.1) + 1;
+                amountOfMines = static_cast<int>(width * height * 0.1) + 1;
             }
         }
             break;
         case NORMAL: {
-            if ((height * width) % 5 == 0) {
-                amountOfMines = static_cast<int>(height * width * 0.2);
+            if ((width * height) % 5 == 0) {
+                amountOfMines = static_cast<int>(width * height * 0.2);
             } else {
-                amountOfMines = static_cast<int>(height * width * 0.2) + 1;
+                amountOfMines = static_cast<int>(width * height * 0.2) + 1;
             }
         }
             break;
         case HARD: {
-            if ((height * width) % 3 == 0) {
-                amountOfMines = static_cast<int>(height * width * 0.33);
+            if ((width * height) % 3 == 0) {
+                amountOfMines = static_cast<int>(width * height * 0.33);
             } else {
-                amountOfMines = static_cast<int>(height * width * 0.33) + 1;
+                amountOfMines = static_cast<int>(width * height * 0.33) + 1;
             }
         }
             break;
         case DEBUG:
         {
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
                     if (i == j || i == 0 || (j == 0 && i % 2 == 0))
                         board[i][j].hasMine = true;
                 }
@@ -66,8 +66,8 @@ void MinesweeperBoard::minesRandomiser()
 {
     int putMines = amountOfMines;
     while (putMines > 0) {
-        if (!board[rand()%height][rand()%width].hasMine) {
-            board[rand()%height][rand()%width].hasMine = true;
+        if (!board[rand() % width][rand() % height].hasMine) {
+            board[rand() % width][rand() % height].hasMine = true;
             putMines--;
         } else
             continue;
@@ -101,12 +101,12 @@ void MinesweeperBoard::debug_display() const
 
 int MinesweeperBoard::getBoardWidth() const
 {
-    return width;
+    return height;
 }
 
 int MinesweeperBoard::getBoardHeight() const
 {
-    return height;
+    return width;
 }
 
 int MinesweeperBoard::getMineCount() const
@@ -118,7 +118,7 @@ int MinesweeperBoard::countMines(int col, int row) const
 {
 //    if (!board[col][row].isRevealed)
 //        return -1;
-    if (col > height || row > width || col < 0 || row < 0)
+    if (col > width || row > height || col < 0 || row < 0)
         return -1;
     /*
              Idea was taken from https://www.geeksforgeeks.org/cpp-implementation-minesweeper-game/
@@ -135,7 +135,7 @@ int MinesweeperBoard::countMines(int col, int row) const
 
     int countOfMines = 0;
 //    Free pos except corners and edges
-    if (col != 0 && row != 0 && col != height - 1 && row != width - 1) {
+    if (col != 0 && row != 0 && col != width - 1 && row != height - 1) {
         if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
         if (board[col - 1][row].hasMine)       // 2.
@@ -164,7 +164,7 @@ int MinesweeperBoard::countMines(int col, int row) const
             countOfMines++;
     }
 //    Top-Right corner
-    if (col == 0 && row == width - 1)
+    if (col == 0 && row == height - 1)
     {
         if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
@@ -174,7 +174,7 @@ int MinesweeperBoard::countMines(int col, int row) const
             countOfMines++;
     }
 //    Bottom-Right corner
-    if (col == height - 1 && row == width - 1)
+    if (col == width - 1 && row == height - 1)
     {
         if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
@@ -184,7 +184,7 @@ int MinesweeperBoard::countMines(int col, int row) const
             countOfMines++;
     }
 //    Bottom-Left corner
-    if (col == height - 1 && row == 0)
+    if (col == width - 1 && row == 0)
     {
         if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
@@ -195,7 +195,7 @@ int MinesweeperBoard::countMines(int col, int row) const
     }
 
     //    Top edge
-    if (col == 0 && row > 0 && row < width - 1)
+    if (col == 0 && row > 0 && row < height - 1)
     {
         if (board[col][row - 1].hasMine)       // 4.
             countOfMines++;
@@ -210,7 +210,7 @@ int MinesweeperBoard::countMines(int col, int row) const
     }
 
     //    Bottom edge
-    if (col == height - 1 && row > 0 && row < width - 1)
+    if (col == width - 1 && row > 0 && row < height - 1)
     {
         if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
@@ -225,7 +225,7 @@ int MinesweeperBoard::countMines(int col, int row) const
     }
 
     //    Right edge
-    if (row == width - 1 && col > 0 && col < height - 1)
+    if (row == height - 1 && col > 0 && col < width - 1)
     {
         if (board[col - 1][row - 1].hasMine)     // 1.
             countOfMines++;
@@ -239,7 +239,7 @@ int MinesweeperBoard::countMines(int col, int row) const
             countOfMines++;
     }
     //    Left edge
-    if (row == 0 && col > 0 && col < height - 1)
+    if (row == 0 && col > 0 && col < width - 1)
     {
         if (board[col - 1][row].hasMine)       // 2.
             countOfMines++;
@@ -260,7 +260,7 @@ bool MinesweeperBoard::hasFlag(int col, int row) const
 {
     if (board[col][row].hasFlag)
         return true;
-    if((col > height || row > width || col < 0 || row < 0) || !board[col][row].hasFlag || board[col][row].isRevealed)
+    if((col > width || row > height || col < 0 || row < 0) || !board[col][row].hasFlag || board[col][row].isRevealed)
         return false;
 }
 
@@ -323,7 +323,7 @@ GameState MinesweeperBoard::getGameState() const
         for (auto &j : i)
             if (j.hasMine && j.isRevealed)
                 return FINISHED_LOSS;
-    int unrevealedCount = height * width;
+    int unrevealedCount = width * height;
     for (auto &i : board)
         for (auto &j : i) {
             if (j.isRevealed)
@@ -346,7 +346,7 @@ GameState MinesweeperBoard::getGameState() const
 
 char MinesweeperBoard::getFieldInfo(int col, int row) const
 {
-    if(col > height || row > width || col < 0 || row < 0)
+    if(col > width || row > height || col < 0 || row < 0)
         return '#';
     if(!board[col][row].isRevealed && board[col][row].hasFlag)
         return 'F';
