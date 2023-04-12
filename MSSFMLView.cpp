@@ -45,6 +45,7 @@ void MSSFMLView::draw(sf::RenderWindow &window)
                 text.setPosition(static_cast<float>(board.getBoardWidth()) / 3 * 50.f, static_cast<float>(board.getBoardHeight()) / 3 * 50.f);
                 window.draw(text);
 
+
             }
         }
     }

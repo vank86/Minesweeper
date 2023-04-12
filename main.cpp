@@ -2,6 +2,7 @@
 #include "MSBoardTextView.h"
 #include "MSTextController.h"
 #include "MSSFMLView.h"
+#include "MSSFMLController.h"
 #include <SFML/Graphics.hpp>
 
 //git connection check
@@ -29,6 +30,7 @@ int main() {
     MinesweeperBoard board(10, 10, DEBUG);
     MSSFMLView view (board);  // przekazujemy przez referencję planszę jako argument konstruktora
     MSTextController ctrl ( board, view );
+    MSSFMLController controller(board,view);
     // symulujemy rozgrywkę
     board.toggleFlag(0,0);
     board.revealField(2,3);
@@ -47,7 +49,8 @@ int main() {
         window.clear();
         view.draw(window);
         window.display();
-        ctrl.play();
+        controller.mouseControl(event);
+
 
     }
 //    std::cout << "\n\n\n";
