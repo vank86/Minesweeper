@@ -25,13 +25,13 @@ void MSSFMLController::mouseControl(sf::Event &event)
     {
         int x = event.mouseButton.x;
         int y = event.mouseButton.y;
-        if (event.mouseButton.button == sf::Mouse::Left)
+        if (event.mouseButton.button == sf::Mouse::Left && board.getGameState() == RUNNING)
         {
-            board.revealField(x / 50.f, y / 50.f);
+            board.revealField(x / 85.9, y / 85.9);
         }
-        else if (event.mouseButton.button == sf::Mouse::Right)
+        else if (event.mouseButton.button == sf::Mouse::Right && board.getGameState() == RUNNING)
         {
-            board.toggleFlag(x / 50.f, y / 50.f);
+            board.toggleFlag(x / 85.9, y / 85.9);
         }
     }
 //    if(board.getGameState() == FINISHED_LOSS)

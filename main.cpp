@@ -8,7 +8,7 @@
 //git connection check
 
 int main() {
-//    srand(time(nullptr));
+    srand(time(nullptr));
 //    MinesweeperBoard board(6,7, EASY);
 //    board.debug_display();
 //    MSBoardTextView view (board);
@@ -23,13 +23,12 @@ int main() {
 
 
 /*------------SFML-----------*/
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Grafika w C++/SFML");
+    sf::RenderWindow window(sf::VideoMode(900, 900), "Grafika w C++/SFML");
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(30);
 
-    MinesweeperBoard board(10, 10, DEBUG);
+    MinesweeperBoard board(10, 10, EASY);
     MSSFMLView view (board);  // przekazujemy przez referencję planszę jako argument konstruktora
-    MSTextController ctrl ( board, view );
     MSSFMLController controller(board,view);
     // symulujemy rozgrywkę
     board.toggleFlag(0,0);
