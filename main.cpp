@@ -34,6 +34,7 @@ int main() {
     board.toggleFlag(0,0);
     board.revealField(2,3);
 
+
     while (window.isOpen())
     {
         sf::Event event;
