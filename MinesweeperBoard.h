@@ -29,6 +29,7 @@ private:
     int amountOfMines;
     GameState State;
     std::vector<std::vector<Field>> board;
+    float sizeOfCell;
 
 public:
 //    MinesweeperBoard();
@@ -48,7 +49,7 @@ public:
     bool isRevealed(int col, int row) const;    // OK
     GameState getGameState() const;             // OK
     char getFieldInfo(int col, int row) const;  // OK
-
+    float getSizeOfCell();
 };
 
 

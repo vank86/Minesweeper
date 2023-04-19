@@ -370,3 +370,7 @@ char MinesweeperBoard::getFieldInfo(int col, int row) const
         }
     }
 }
+float MinesweeperBoard::getSizeOfCell()
+{
+    return sizeOfCell = static_cast<float>(getBoardHeight()*9);
+}

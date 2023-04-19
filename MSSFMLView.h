@@ -12,11 +12,9 @@ class MSSFMLView {
 private:
     MinesweeperBoard &board;
     sf::Font font;
-    float sizeOfCell;
 public:
     MSSFMLView(MinesweeperBoard &b);
     void draw(sf::RenderWindow &window);
-    float getSizeOfCell();
 };
 
 

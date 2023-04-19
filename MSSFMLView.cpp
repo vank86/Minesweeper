@@ -18,25 +18,26 @@ void MSSFMLView::draw(sf::RenderWindow &window)
         for (int j = 0; j < board.getBoardWidth(); j++) {
             if (board.hasFlag(i,j))
             {
-                sf::RectangleShape rectangle(sf::Vector2f(sizeOfCell, sizeOfCell));
+                sf::RectangleShape rectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
                 rectangle.setFillColor(sf::Color::Red);
-                rectangle.setPosition(static_cast<float>(i)*sizeOfCell, static_cast<float>(j)*sizeOfCell);
+                rectangle.setPosition(static_cast<float>(i)*board.getSizeOfCell(), static_cast<float>(j)*board.getSizeOfCell());
                 window.draw(rectangle);
             }
             if(board.isRevealed(i,j) && board.countMines(i,j))
             {
                 font.loadFromFile("../arial.ttf");
                 sf::Text text(std::to_string(board.countMines(i,j)), font, 40);
-                text.setPosition(static_cast<float>(i*sizeOfCell + sizeOfCell*0.33), getSizeOfCell() + sizeOfCell*0.15);
+                text.setPosition(static_cast<float>(i*board.getSizeOfCell() + board.getSizeOfCell()*0.33), j*board.getSizeOfCell() + board.getSizeOfCell()*0.15);
+                window.draw(text);
                 window.draw(text);
             }
             if(!board.isRevealed(i,j) && !board.hasFlag(i,j))
             {
-                sf::RectangleShape emptyRectangle(sf::Vector2f(sizeOfCell, sizeOfCell));
+                sf::RectangleShape emptyRectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
                 emptyRectangle.setFillColor(sf::Color::Green);
                 emptyRectangle.setOutlineThickness(-3.f);
                 emptyRectangle.setOutlineColor(sf::Color::White);
-                emptyRectangle.setPosition(static_cast<float>(i)*sizeOfCell, static_cast<float>(j)*sizeOfCell);
+                emptyRectangle.setPosition(static_cast<float>(i)*board.getSizeOfCell(), static_cast<float>(j)*board.getSizeOfCell());
                 window.draw(emptyRectangle);
             }
             if(board.getGameState() == FINISHED_LOSS)
@@ -57,7 +58,3 @@ void MSSFMLView::draw(sf::RenderWindow &window)
     }
 }
 
-float MSSFMLView::getSizeOfCell()
-{
-    return sizeOfCell = static_cast<float>(board.getBoardHeight()*90);
-}
