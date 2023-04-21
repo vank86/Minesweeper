@@ -16,6 +16,15 @@ void MSSFMLView::draw(sf::RenderWindow &window)
 //    float sizeOfCell = 900*0.1;
     for (int i = 0; i < board.getBoardHeight(); i++) {
         for (int j = 0; j < board.getBoardWidth(); j++) {
+            if (board.isRevealed(i,j))
+            {
+                sf::RectangleShape emptyRectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
+                emptyRectangle.setFillColor(sf::Color::Black);
+                emptyRectangle.setOutlineThickness(-3.f);
+                emptyRectangle.setOutlineColor(sf::Color::White);
+                emptyRectangle.setPosition(static_cast<float>(i)*board.getSizeOfCell(), static_cast<float>(j)*board.getSizeOfCell());
+                window.draw(emptyRectangle);
+            }
             if (board.hasFlag(i,j))
             {
                 sf::RectangleShape rectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
@@ -25,10 +34,15 @@ void MSSFMLView::draw(sf::RenderWindow &window)
             }
             if(board.isRevealed(i,j) && board.countMines(i,j))
             {
+//                sf::RectangleShape emptyRectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
+//                emptyRectangle.setFillColor(sf::Color::Black);
+//                emptyRectangle.setOutlineThickness(-3.f);
+//                emptyRectangle.setOutlineColor(sf::Color::White);
+//                emptyRectangle.setPosition(static_cast<float>(i)*board.getSizeOfCell(), static_cast<float>(j)*board.getSizeOfCell());
+//                window.draw(emptyRectangle);
                 font.loadFromFile("../arial.ttf");
-                sf::Text text(std::to_string(board.countMines(i,j)), font, 40);
-                text.setPosition(static_cast<float>(i*board.getSizeOfCell() + board.getSizeOfCell()*0.33), j*board.getSizeOfCell() + board.getSizeOfCell()*0.15);
-                window.draw(text);
+                sf::Text text(std::to_string(board.countMines(i,j)), font, board.getSizeOfCell() / 2.25);
+                text.setPosition(static_cast<float>(i*board.getSizeOfCell() + board.getSizeOfCell()*0.33), j*board.getSizeOfCell() + board.getSizeOfCell()*0.20);
                 window.draw(text);
             }
             if(!board.isRevealed(i,j) && !board.hasFlag(i,j))
