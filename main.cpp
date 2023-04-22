@@ -24,7 +24,7 @@ int main() {
 
 /*------------SFML-----------*/
     sf::RenderWindow window(sf::VideoMode(900, 900), "Grafika w C++/SFML");
-    window.setVerticalSyncEnabled(false);
+    window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(30);
 
     MinesweeperBoard board(10, 10, DEBUG);
