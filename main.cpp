@@ -23,7 +23,7 @@ int main() {
 
 
 /*------------SFML-----------*/
-    sf::RenderWindow window(sf::VideoMode(900, 900), "Grafika w C++/SFML");
+    sf::RenderWindow window(sf::VideoMode(900, 900), "Grafika w C++/SFML", sf::Style::Close);
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(30);
 

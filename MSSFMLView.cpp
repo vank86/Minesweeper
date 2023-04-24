@@ -23,12 +23,12 @@ void MSSFMLView::draw(sf::RenderWindow &window)
         for (int j = 0; j < board.getBoardWidth(); j++) {
             if (board.isRevealed(i,j))
             {
-                sf::RectangleShape emptyRectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
-                emptyRectangle.setFillColor(sf::Color::Black);
-                emptyRectangle.setOutlineThickness(-3.f);
-                emptyRectangle.setOutlineColor(sf::Color::White);
-                emptyRectangle.setPosition(static_cast<float>(i)*board.getSizeOfCell(), static_cast<float>(j)*board.getSizeOfCell());
-                window.draw(emptyRectangle);
+//                sf::RectangleShape emptyRectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
+//                emptyRectangle.setFillColor(sf::Color::Black);
+//                emptyRectangle.setOutlineThickness(-3.f);
+//                emptyRectangle.setOutlineColor(sf::Color::White);
+//                emptyRectangle.setPosition(static_cast<float>(i)*board.getSizeOfCell(), static_cast<float>(j)*board.getSizeOfCell());
+//                window.draw(emptyRectangle);
                 sprite.setTextureRect(sf::IntRect(0,0,board.getSizeOfCell(),board.getSizeOfCell()));
                 sprite.setPosition(i *board.getSizeOfCell(), j * board.getSizeOfCell());
             }
@@ -39,7 +39,14 @@ void MSSFMLView::draw(sf::RenderWindow &window)
 
 
             }
-            if(board.isRevealed(i,j) && board.countMines(i,j))
+            if(board.isRevealed(i,j) && board.hasMine(i,j))
+            {
+
+                sprite.setTextureRect(sf::IntRect(spriteRect*9,0,board.getSizeOfCell(),board.getSizeOfCell()));
+                sprite.setPosition(i *board.getSizeOfCell(), j * board.getSizeOfCell());
+
+            }
+            if(board.isRevealed(i,j) && board.countMines(i,j) && !board.hasMine(i,j))
             {
 //                sf::RectangleShape emptyRectangle(sf::Vector2f(board.getSizeOfCell(), board.getSizeOfCell()));
 //                emptyRectangle.setFillColor(sf::Color::Black);
@@ -72,7 +79,7 @@ void MSSFMLView::draw(sf::RenderWindow &window)
                 font.loadFromFile("../font/arial.ttf");
                 sf::Text text("GAME OVER", font, 80);
                 text.setFillColor(sf::Color::Red);
-                text.setPosition(static_cast<float>(board.getBoardWidth()) / 4 * board.getSizeOfCell(), static_cast<float>(board.getBoardHeight()) / 3 * board.getSizeOfCell());
+                text.setPosition(board.getSizeOfCell() * 2.4, board.getSizeOfCell() * 3);
                 window.draw(text);
             }
             if(board.getGameState() == FINISHED_WIN)

@@ -29,26 +29,26 @@ private:
     int amountOfMines;
     GameState State;
     std::vector<std::vector<Field>> board;
-    float sizeOfCell;
+
 
 public:
 //    MinesweeperBoard();
     MinesweeperBoard(int widthInput, int heightInput, GameMode mode);
-    void debug_display() const;
     int createMines(const GameMode& mode);
     void minesRandomiser();
     /*      PART 4        */
     // to think about DO NOTHING IF(*):
     int getBoardWidth() const;                  // OK
     int getBoardHeight() const;                 // OK
-    int getMineCount() const;                   // OK
     int countMines(int col, int row) const;     // OK
     bool hasFlag(int col, int row) const;       // OK, MAY BE REBUILT
+    bool hasMine(int col, int row) const;
     void toggleFlag(int col, int row);          // OK       *
+    void unToggleFlag(int col, int row);
+
     void revealField(int col, int row);         // NOT OK   *
     bool isRevealed(int col, int row) const;    // OK
     GameState getGameState() const;             // OK
-    char getFieldInfo(int col, int row) const;  // OK
     float getSizeOfCell();
 };
 

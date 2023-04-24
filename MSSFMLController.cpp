@@ -18,12 +18,18 @@ void MSSFMLController::mouseControl(sf::Event &event)
         int y = event.mouseButton.y;
         if (event.mouseButton.button == sf::Mouse::Left && board.getGameState() == RUNNING)
         {
-            board.revealField(x / board.getSizeOfCell(), y / board.getSizeOfCell());
+            board.revealField(x / static_cast<int>(board.getSizeOfCell()), y / static_cast<int>(board.getSizeOfCell()));
         }
         else if (event.mouseButton.button == sf::Mouse::Right && board.getGameState() == RUNNING)
         {
-            board.toggleFlag(x / board.getSizeOfCell(), y / board.getSizeOfCell());
+            if (!board.hasFlag(x /static_cast<int>(board.getSizeOfCell()),y / static_cast<int>(board.getSizeOfCell()))){
+                board.toggleFlag(x / static_cast<int>(board.getSizeOfCell()), y / static_cast<int>(board.getSizeOfCell()));
+            } else {
+                board.unToggleFlag(x / static_cast<int>(board.getSizeOfCell()), y / static_cast<int>(board.getSizeOfCell()));
+
+            }
         }
+
     }
 //    if(board.getGameState() == FINISHED_LOSS)
 //     GAME_PAUSED

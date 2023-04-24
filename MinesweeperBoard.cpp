@@ -74,31 +74,6 @@ void MinesweeperBoard::minesRandomiser()
     }
 }
 
-void MinesweeperBoard::debug_display() const
-{
-    for (int i = 0; i < board.size(); i++) {
-        cout << i + 1 << ". ";
-        cout  << "[";
-        for (auto j : board[i]) {
-            cout << "[";
-            if (!j.hasMine)
-                cout << ".";
-            else
-                cout << "M";
-            if (!j.isRevealed)
-                cout << ".";
-            else
-                cout << "o";
-            if(!j.hasFlag)
-                cout << ".";
-            else
-                cout << "f";
-            cout << "]";
-        }
-        cout << "]\n";
-    }
-}
-
 int MinesweeperBoard::getBoardWidth() const
 {
     return height;
@@ -107,11 +82,6 @@ int MinesweeperBoard::getBoardWidth() const
 int MinesweeperBoard::getBoardHeight() const
 {
     return width;
-}
-
-int MinesweeperBoard::getMineCount() const
-{
-    return amountOfMines;
 }
 
 int MinesweeperBoard::countMines(int col, int row) const
@@ -264,13 +234,27 @@ bool MinesweeperBoard::hasFlag(int col, int row) const
         return false;
 }
 
+bool MinesweeperBoard::hasMine(int col, int row) const
+{
+    if (board[col][row].hasMine)
+        return true;
+    if((col > width || row > height || col < 0 || row < 0) || !board[col][row].hasMine || board[col][row].isRevealed)
+        return false;
+}
+
 void MinesweeperBoard::toggleFlag(int col, int row)
 {
     if (!board[col][row].isRevealed && !board[col][row].hasFlag)
         board[col][row].hasFlag = true;
-    else if(!board[col][row].isRevealed && board[col][row].hasFlag)
+//    else if(!board[col][row].isRevealed && board[col][row].hasFlag)
+//        board[col][row].hasFlag = false;
+}
+void MinesweeperBoard::unToggleFlag(int col, int row)
+{
+    if(!board[col][row].isRevealed && board[col][row].hasFlag)
         board[col][row].hasFlag = false;
 }
+
 
 // try to reveal the field at (row,col)
 // Do nothing if any of the following is true
@@ -337,40 +321,7 @@ GameState MinesweeperBoard::getGameState() const
 
 
 
-// if row or col is outside board                         - return '#' character                +++++
-// if the field is not revealed and has a flag            - return 'F' character                +++++
-// if the field is not revealed and does not have a flag  - return '_' (underscore) character   +++++
-// if the field is revealed and has mine                  - return 'x' character                +++++
-// if the field is revealed and has 0 mines around        - return ' ' (space) character        +++++
-// if the field is revealed and has some mines around     - return '1' ... '8' (number of mines as a digit)
-
-char MinesweeperBoard::getFieldInfo(int col, int row) const
-{
-    if(col > width || row > height || col < 0 || row < 0)
-        return '#';
-    if(!board[col][row].isRevealed && board[col][row].hasFlag)
-        return 'F';
-    if(!board[col][row].isRevealed && !board[col][row].hasFlag)
-        return '_';
-    if(board[col][row].isRevealed && board[col][row].hasMine)
-        return 'x';
-    //  == 0 and > 0 cases are combined into 1 function instead of 2 separated ones
-    if(board[col][row].isRevealed && MinesweeperBoard::countMines(col, row) >= 0) {
-        switch (MinesweeperBoard::countMines(col, row)) {
-            case 0: return ' ';
-            case 1: return '1';
-            case 2: return '2';
-            case 3: return '3';
-            case 4: return '4';
-            case 5: return '5';
-            case 6: return '6';
-            case 7: return '7';
-            case 8: return '8';
-            default: return '?';
-        }
-    }
-}
 float MinesweeperBoard::getSizeOfCell()
 {
-    return sizeOfCell = static_cast<float>(getBoardHeight()*9);
+    return static_cast<float>(getBoardHeight()*9);
 }
