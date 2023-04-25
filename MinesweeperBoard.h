@@ -9,8 +9,6 @@
 #include <iostream>
 #include <algorithm>
 
-using std::cout;
-
 enum GameMode   {DEBUG, EASY, NORMAL, HARD};
 enum GameState  { RUNNING, FINISHED_WIN, FINISHED_LOSS };
 
@@ -32,7 +30,6 @@ private:
 
 
 public:
-//    MinesweeperBoard();
     MinesweeperBoard(int widthInput, int heightInput, GameMode mode);
     int createMines(const GameMode& mode);
     void minesRandomiser();
@@ -44,12 +41,10 @@ public:
     bool hasFlag(int col, int row) const;       // OK, MAY BE REBUILT
     bool hasMine(int col, int row) const;
     void toggleFlag(int col, int row);          // OK       *
-    void unToggleFlag(int col, int row);
-
     void revealField(int col, int row);         // NOT OK   *
     bool isRevealed(int col, int row) const;    // OK
     GameState getGameState() const;             // OK
-    float getSizeOfCell();
+    float getSizeOfCell() const;
 };
 
 

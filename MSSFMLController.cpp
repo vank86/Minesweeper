@@ -14,23 +14,17 @@ void MSSFMLController::mouseControl(sf::Event &event)
 {
     if (event.type == sf::Event::MouseButtonPressed)
     {
-        int x = event.mouseButton.x;
-        int y = event.mouseButton.y;
-        if (event.mouseButton.button == sf::Mouse::Left && board.getGameState() == RUNNING)
+        int x = event.mouseButton.x / static_cast<int>(board.getSizeOfCell());
+        int y = event.mouseButton.y / static_cast<int>(board.getSizeOfCell());
+        if (event.mouseButton.button == sf::Mouse::Left && board.getGameState() == RUNNING && !board.hasFlag(x,y))
         {
-            board.revealField(x / static_cast<int>(board.getSizeOfCell()), y / static_cast<int>(board.getSizeOfCell()));
+            board.revealField(x,y);
         }
-        else if (event.mouseButton.button == sf::Mouse::Right && board.getGameState() == RUNNING)
+        else if (event.mouseButton.button == sf::Mouse::Right && board.getGameState() == RUNNING )
         {
-            if (!board.hasFlag(x /static_cast<int>(board.getSizeOfCell()),y / static_cast<int>(board.getSizeOfCell()))){
-                board.toggleFlag(x / static_cast<int>(board.getSizeOfCell()), y / static_cast<int>(board.getSizeOfCell()));
-            } else {
-                board.unToggleFlag(x / static_cast<int>(board.getSizeOfCell()), y / static_cast<int>(board.getSizeOfCell()));
+            board.toggleFlag(x, y);
 
-            }
         }
 
     }
-//    if(board.getGameState() == FINISHED_LOSS)
-//     GAME_PAUSED
 }
