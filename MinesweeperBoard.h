@@ -9,8 +9,6 @@
 #include <iostream>
 #include <algorithm>
 
-using std::cout;
-
 enum GameMode   {DEBUG, EASY, NORMAL, HARD};
 enum GameState  { RUNNING, FINISHED_WIN, FINISHED_LOSS };
 
@@ -24,31 +22,29 @@ struct Field{
 class MinesweeperBoard
 {
 private:
-    int height;
     int width;
+    int height;
     int amountOfMines;
     GameState State;
     std::vector<std::vector<Field>> board;
 
+
 public:
-//    MinesweeperBoard();
-    MinesweeperBoard(int heightInput, int widthInput, GameMode mode);
-    void debug_display() const;
+    MinesweeperBoard(int widthInput, int heightInput, GameMode mode);
     int createMines(const GameMode& mode);
     void minesRandomiser();
     /*      PART 4        */
     // to think about DO NOTHING IF(*):
     int getBoardWidth() const;                  // OK
     int getBoardHeight() const;                 // OK
-    int getMineCount() const;                   // OK
     int countMines(int col, int row) const;     // OK
     bool hasFlag(int col, int row) const;       // OK, MAY BE REBUILT
+    bool hasMine(int col, int row) const;
     void toggleFlag(int col, int row);          // OK       *
     void revealField(int col, int row);         // NOT OK   *
     bool isRevealed(int col, int row) const;    // OK
     GameState getGameState() const;             // OK
-    char getFieldInfo(int col, int row) const;  // OK
-
+    float getSizeOfCell() const;
 };
 
 

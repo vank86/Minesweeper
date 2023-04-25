@@ -12,6 +12,8 @@ class MSSFMLView {
 private:
     MinesweeperBoard &board;
     sf::Font font;
+    sf::Texture texture;
+    int spriteRect = 90;
 public:
     MSSFMLView(MinesweeperBoard &b);
     void draw(sf::RenderWindow &window);
